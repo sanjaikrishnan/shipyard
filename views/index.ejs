@@ -3,16 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shipyard</title>
+    <title>Shipyard Website</title>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <h1>Welcome to the Shipyard Website</h1>
+
+    <!-- Navigation Bar -->
     <nav>
-        <a href="/">Home</a>
-        <a href="/about">About Us</a>
-        <a href="/services">Services</a>
-        <a href="/contact">Contact</a>
+        <h1>Shipyard Management</h1>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/teams">Teams</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/tender">Tender</a></li>
+            <li><a href="/vigilance">Vigilance</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
     </nav>
+
+    <!-- Banner Section -->
+    <section class="banner">
+        <h2><%= homeData.bannerText %></h2>
+    </section>
+
+    <!-- Facilities Section -->
+    <section class="facilities">
+        <h2>Our Facilities</h2>
+        <div class="facility-cards">
+            <% homeData.facilities.forEach(facility => { %>
+                <div class="facility-card">
+                    <img src="<%= facility.image %>" alt="<%= facility.name %>">
+                    <p><%= facility.name %></p>
+                    <small><%= facility.description %></small>
+                </div>
+            <% }) %>
+        </div>
+    </section>
+
+    <!-- Shipyard Overview -->
+    <section class="overview">
+        <h2>Shipyard Overview</h2>
+        <p><%= homeData.shipyardOverview %></p>
+    </section>
+
+    <!-- History & Ownership -->
+    <section class="history">
+        <h2>History & Ownership</h2>
+        <p><%= homeData.history %></p>
+    </section>
+
+    <!-- Map Integration -->
+    <section class="map">
+        <h2>Our Location</h2>
+        <iframe src="<%= homeData.locationMap %>" width="600" height="400"></iframe>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Shipyard Management. All rights reserved.</p>
+    </footer>
+
 </body>
 </html>
