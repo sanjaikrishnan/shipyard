@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipyard Management - Services & Products</title>
+    <link rel="stylesheet" href="/style.css">
+    <script defer src="/script.js"></script>
+    <style>
+        /* Navigation Bar Styles */
+        nav {
+            background: linear-gradient(90deg, #005AA7, #FFFDE4);
+            padding: 15px 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            color: #002244;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        nav ul li a:hover {
+            background: #ffcc00;
+            color: black;
+        }
+
+        /* Services Section Styling */
+        .services {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 50px 20px;
+            flex-wrap: wrap;
+        }
+
+        .service-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+            text-align: center;
+            width: 300px;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card h2 a {
+            text-decoration: none;
+            color: #005AA7;
+        }
+
+        .service-card p {
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/teams">Teams</a></li>
+            <li><a href="/tenders">Tenders</a></li>
+            <li><a href="/vigilance">Vigilance</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <h1>Our Services & Products</h1>
+        <p>Providing top-tier shipyard solutions</p>
+    </header>
+
+    <section class="services">
+        <div class="service-card"><h2><a href="#shipbuilding">Ship Building</a></h2><p>Advanced shipbuilding technologies.</p></div>
+        <div class="service-card"><h2><a href="#shiprepair">Ship Repair</a></h2><p>Efficient repair services.</p></div>
+        <div class="service-card"><h2><a href="#marineengineering">Marine Engineering</a></h2><p>Expert faculty and trainers.</p></div>
+    </section>
+
+    <!-- Ship Building Section -->
+    <section id="shipbuilding" class="content-section">
+        <h2>Ship Building</h2>
+        <p>We use cutting-edge technology for shipbuilding.</p>
+    </section>
+
+    <!-- Ship Repair Section -->
+    <section id="shiprepair" class="content-section">
+        <h2>Ship Repair</h2>
+        <form action="/shiprepair/complaint" method="POST" class="form">
+            <label>Ship Model:</label><input type="text" name="model" required>
+            <label>Description:</label><textarea name="description" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <!-- Marine Engineering Section -->
+    <section id="marineengineering" class="content-section">
+        <h2>Marine Engineering Faculty</h2>
+        <div class="faculty-list">
+            <div class="faculty-card"><img src="/images/prof_john_doe.jpg" alt="Professor John Doe"><h3>Professor John Doe</h3></div>
+        </div>
+    </section>
+
+    <%- include('partials/footer') %>
+</body>
+</html>

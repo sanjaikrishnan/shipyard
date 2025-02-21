@@ -11,7 +11,7 @@ body {
 
 /* Navigation Bar */
 .navbar {
-    background: white;
+    background: linear-gradient(90deg, #005AA7, #FFFDE4);
     width: 100%;
     padding: 15px 0;
     position: fixed;
@@ -30,15 +30,24 @@ body {
     padding: 0 20px;
 }
 
+/* Logo & Shipyard Name */
+.logo-section {
+    display: flex;
+    align-items: center;
+}
+
 .logo {
     height: 50px;
+    margin-right: 10px;
 }
 
 .nav-title {
     font-size: 22px;
     font-weight: bold;
+    color: #002244;
 }
 
+/* Navigation Links */
 .nav-links {
     list-style: none;
     display: flex;
@@ -50,14 +59,42 @@ body {
 }
 
 .nav-links li a {
-    color: black;
+    color: #002244;
     text-decoration: none;
     font-size: 16px;
-    transition: color 0.3s;
+    font-weight: bold;
+    transition: all 0.3s;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .nav-links li a:hover {
-    color: #003366;
+    background: #ffcc00;
+    color: black;
+}
+
+/* Sign In Button */
+/* Smaller Sign In Button */
+/* Smaller Sign In Button */
+/* Smaller Sign In Button */
+/* Smaller Sign In Button */
+.sign-in-btn {
+    background: #002244;
+    color: white;
+    padding: 3px 8px !important; /* Further reduced padding */
+    font-size: 12px !important; /* Smaller text */
+    border-radius: 3px !important; /* Smaller rounded corners */
+    text-decoration: none;
+    transition: background 0.3s;
+    display: inline-block; /* Ensure it behaves like a button */
+    line-height: 1.5; /* Adjust line height for better alignment */
+    width: auto; /* Allow the button to shrink to fit content */
+    min-width: 70px; /* Set a minimum width to avoid being too small */
+}
+
+.sign-in-btn:hover {
+    background: #ffcc00;
+    color: black;
 }
 
 /* Image Scrolling Section */
@@ -132,24 +169,121 @@ body {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Contact Form */
-form {
-    display: flex;
-    flex-direction: column;
+/* Footer */
+footer {
+    margin-top: 20px;
+    background: #002244;
+    color: white;
+    padding: 15px;
+}
+/* Facilities Section */
+.facilities-section {
+    padding: 50px 20px;
+    background: rgba(255, 255, 255, 0.9);
 }
 
-input, textarea {
+.facilities-section h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: #002244;
+}
+
+.facilities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.facility-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.facility-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.facility-overlay {
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background: rgba(0, 34, 68, 0.9);
+    color: white;
+    transition: bottom 0.3s ease-in-out;
+}
+
+.facility-card:hover .facility-overlay {
+    bottom: 0;
+}
+
+.facility-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.facility-overlay h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.facility-overlay p {
+    font-size: 14px;
+    margin: 0;
+}
+/* Signup & Login Page */
+.signup-container, .login-container {
+    max-width: 400px;
+    margin: 80px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.input-group input {
     width: 100%;
     padding: 10px;
-    margin-top: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-/* Footer */
-footer {
-    margin-top: 20px;
-    background: rgba(0, 51, 102, 0.9);
+.btn {
+    width: 100%;
+    background: #003366;
     color: white;
-    padding: 15px;
+    padding: 12px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
 }
+
+.btn:hover {
+    background: #ffcc00;
+    color: black;
+}
+

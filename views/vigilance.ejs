@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vigilance & Compliance</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        .vigilance-section { padding: 50px 0; }
+        .card { transition: transform 0.3s ease-in-out; }
+        .card:hover { transform: translateY(-5px); }
+    </style>
+</head>
+<body>
+    <div class="container vigilance-section">
+        <h2 class="text-center mb-5">Vigilance & Compliance</h2>
+        
+        <h3>Vigilance Guidelines</h3>
+        <p>Our vigilance department ensures transparency and integrity...</p>
+        <p>Contact: vigilance@shipyard.com | +123 456 7890</p>
+        
+        <h3 class="mt-5">Report an Issue</h3>
+        <form action="/vigilance/report" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label">Name (Optional)</label>
+                <input type="text" name="name" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Contact Details (Optional)</label>
+                <input type="text" name="contactDetails" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Type of Complaint</label>
+                <select name="complaintType" class="form-select" required>
+                    <option value="Fraud">Fraud</option>
+                    <option value="Corruption">Corruption</option>
+                    <option value="Safety Violation">Safety Violation</option>
+                    <option value="Harassment">Harassment</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Detailed Description</label>
+                <textarea name="description" class="form-control" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Attach Evidence (Optional)</label>
+                <input type="file" name="evidence" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-danger">Submit Report</button>
+        </form>
+        
+        <h3 class="mt-5">FAQs on Vigilance</h3>
+        <p><strong>Q: How is my report handled?</strong></p>
+        <p>A: Your report is reviewed by the vigilance team confidentially...</p>
+        <p><strong>Q: Will my identity remain confidential?</strong></p>
+        <p>A: Yes, reports can be submitted anonymously.</p>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>

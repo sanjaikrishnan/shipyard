@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shipyard Management</title>
+    <title>Neptune Shipyard</title>
     <link rel="stylesheet" href="/style.css">
     <script defer src="/script.js"></script>
 </head>
@@ -12,16 +12,19 @@
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-container">
-            <img src="/images/lo.jpg" alt="Shipyard Logo" class="logo">
-            <h1 class="nav-title">Shipyard Management</h1>
+            <div class="logo-section">
+                <img src="/images/lo.jpg" alt="Neptune Shipyard Logo" class="logo">
+                <h1 class="nav-title">Neptune Shipyard</h1>
+            </div>
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About</a></li>
                 <li><a href="/teams">Teams</a></li>
                 <li><a href="/services">Services</a></li>
-                <li><a href="/tender">Tender</a></li>
+                <li><a href="/tenders">Tender</a></li>
                 <li><a href="/vigilance">Vigilance</a></li>
                 <li><a href="/contact">Contact</a></li>
+                <li><a href="/signin" class="nav-signin">Sign In</a></li> <!-- Sign In now inside Navbar -->
             </ul>
         </div>
     </nav>
@@ -39,11 +42,44 @@
 
     <!-- Welcome Section -->
     <section class="welcome-section">
-        <h2>Welcome to Our Shipyard</h2>
-        <div class="welcome-buttons">
-            <a href="/services" class="btn">Explore Services</a>
-            <a href="#location" class="btn">Our Location</a>
-            <a href="/about" class="btn">About Us</a>
+        <h2>Welcome to Neptune Shipyard</h2>
+    </section>
+
+    <!-- Facilities Section -->
+    <section class="facilities-section">
+        <h2>Our Facilities</h2>
+        <div class="facilities-grid">
+            <a href="/facilities/drydock" class="facility-card">
+                <img src="/images/drydock.jpg" alt="Dry Dock">
+                <div class="facility-overlay">
+                    <h3>Dry Dock</h3>
+                    <p>State-of-the-art dry docking facilities for ship repairs.</p>
+                </div>
+            </a>
+
+            <a href="/facilities/storage" class="facility-card">
+                <img src="/images/storage.jpg" alt="Storage Area">
+                <div class="facility-overlay">
+                    <h3>Storage Area</h3>
+                    <p>Secure and spacious storage for ship components.</p>
+                </div>
+            </a>
+
+            <a href="/facilities/workshop" class="facility-card">
+                <img src="/images/workshop.jpg" alt="Workshops">
+                <div class="facility-overlay">
+                    <h3>Workshops</h3>
+                    <p>Fully equipped workshops for shipbuilding and repairs.</p>
+                </div>
+            </a>
+
+            <a href="/facilities/hotels" class="facility-card">
+                <img src="/images/hostel.jpeg" alt="Hotels">
+                <div class="facility-overlay">
+                    <h3>Hotels</h3>
+                    <p>Comfortable accommodations for crew and visitors.</p>
+                </div>
+            </a>
         </div>
     </section>
 
@@ -71,7 +107,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Shipyard Management. All rights reserved.</p>
+        <p>&copy; 2025 Neptune Shipyard. All rights reserved.</p>
     </footer>
 
 </body>
