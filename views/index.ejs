@@ -3,60 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shipyard Website</title>
+    <title>Shipyard Management</title>
     <link rel="stylesheet" href="/style.css">
+    <script defer src="/script.js"></script>
 </head>
 <body>
 
     <!-- Navigation Bar -->
-    <nav>
-        <h1>Shipyard Management</h1>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/teams">Teams</a></li>
-            <li><a href="/services">Services</a></li>
-            <li><a href="/tender">Tender</a></li>
-            <li><a href="/vigilance">Vigilance</a></li>
-            <li><a href="/contact">Contact</a></li>
-        </ul>
+    <nav class="navbar">
+        <div class="nav-container">
+            <img src="/images/lo.jpg" alt="Shipyard Logo" class="logo">
+            <h1 class="nav-title">Shipyard Management</h1>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/teams">Teams</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/tender">Tender</a></li>
+                <li><a href="/vigilance">Vigilance</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <!-- Banner Section -->
-    <section class="banner">
-        <h2><%= homeData.bannerText %></h2>
-    </section>
-
-    <!-- Facilities Section -->
-    <section class="facilities">
-        <h2>Our Facilities</h2>
-        <div class="facility-cards">
-            <% homeData.facilities.forEach(facility => { %>
-                <div class="facility-card">
-                    <img src="<%= facility.image %>" alt="<%= facility.name %>">
-                    <p><%= facility.name %></p>
-                    <small><%= facility.description %></small>
-                </div>
-            <% }) %>
+    <!-- Image Scrolling Section -->
+    <section class="image-slider">
+        <div class="image-track">
+            <img src="/images/drydock.jpg" alt="Dry Dock">
+            <img src="/images/storage.jpg" alt="Storage Area">
+            <img src="/images/workshop.jpg" alt="Workshops">
+            <img src="/images/image1.jpeg" alt="Shipyard View">
+            <img src="/images/image2.jpeg" alt="Another Shipyard View">
         </div>
     </section>
 
-    <!-- Shipyard Overview -->
-    <section class="overview">
-        <h2>Shipyard Overview</h2>
-        <p><%= homeData.shipyardOverview %></p>
+    <!-- Welcome Section -->
+    <section class="welcome-section">
+        <h2>Welcome to Our Shipyard</h2>
+        <div class="welcome-buttons">
+            <a href="/services" class="btn">Explore Services</a>
+            <a href="#location" class="btn">Our Location</a>
+            <a href="/about" class="btn">About Us</a>
+        </div>
     </section>
 
-    <!-- History & Ownership -->
-    <section class="history">
-        <h2>History & Ownership</h2>
-        <p><%= homeData.history %></p>
-    </section>
-
-    <!-- Map Integration -->
-    <section class="map">
+    <!-- Location Section -->
+    <section class="map" id="location">
         <h2>Our Location</h2>
-        <iframe src="<%= homeData.locationMap %>" width="600" height="400"></iframe>
+        <iframe src="https://www.google.com/maps/embed?..." width="600" height="400"></iframe>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section class="contact">
+        <div class="contact-container">
+            <h2>Contact Us</h2>
+            <form id="contactForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+                <label for="message">Message:</label>
+                <textarea id="message" required></textarea>
+                <button type="submit" class="btn">Submit</button>
+            </form>
+        </div>
     </section>
 
     <!-- Footer -->
