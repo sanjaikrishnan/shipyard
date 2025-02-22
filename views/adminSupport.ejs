@@ -1,0 +1,29 @@
+<% include partials/navbar %>
+<div class="container">
+    <h2>Admin Panel - Respond to Support Requests</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Message</th>
+            <th>Status</th>
+            <th>Response</th>
+            <th>Action</th>
+        </tr>
+        <% requests.forEach(request => { %>
+            <tr>
+                <td><%= request.name %></td>
+                <td><%= request.email %></td>
+                <td><%= request.message %></td>
+                <td><%= request.status %></td>
+                <td>
+                    <form action="/support/respond/<%= request._id %>" method="POST">
+                        <input type="text" name="response" placeholder="Enter response">
+                        <button type="submit">Respond</button>
+                    </form>
+                </td>
+            </tr>
+        <% }); %>
+    </table>
+</div>
+<% include partials/footer %>

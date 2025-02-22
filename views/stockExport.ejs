@@ -1,0 +1,31 @@
+<% include partials/navbar %>
+<div class="container">
+    <h2>Stock Export Request</h2>
+    <form action="/export" method="POST" enctype="multipart/form-data">
+        <label>Full Name</label>
+        <input type="text" name="fullName" required>
+
+        <label>Company Name</label>
+        <input type="text" name="companyName" required>
+
+        <label>Stock Name</label>
+        <input type="text" name="stockName" required>
+
+        <label>Stock Category</label>
+        <select name="stockCategory">
+            <option>Machinery</option>
+            <option>Spare Parts</option>
+            <option>Raw Materials</option>
+            <option>Containers</option>
+        </select>
+
+        <label>Stock Images</label>
+        <input type="file" name="stockImages" multiple>
+
+        <label>Confirm Details</label>
+        <input type="checkbox" name="terms" required> I confirm all details are accurate
+
+        <button type="submit">Submit Request</button>
+    </form>
+</div>
+<% include partials/footer %>

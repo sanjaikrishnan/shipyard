@@ -7,10 +7,15 @@ const bcrypt = require("bcryptjs");
 const session = require("express-session");
 const multer = require("multer");
 
+const stockExportRoutes = require("./routes/stockExport");
+const inventoryRoutes = require("./routes/inventory");
+const supportRoutes = require("./routes/support");
+
 const app = express();
 
 // ✅ Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static(path.join(__dirname, "public"))); // Serve CSS, JS, Images
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -23,10 +28,10 @@ app.use(session({
     cookie: { secure: false }
 }));
 
-// ✅ Connect to MongoDB Atlas
-const MONGO_URI = process.env.MONGO_URI;
-mongoose.connect(MONGO_URI)
-    .then(() => console.log("✅ Connected to MongoDB Atlas"))
+// ✅ MongoDB Connection (Local & Atlas)
+const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/shipyardDB";
+mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log("✅ Connected to MongoDB"))
     .catch(err => console.error("❌ MongoDB Connection Error:", err));
 
 // ✅ User Schema & Model
@@ -92,6 +97,11 @@ const storage = multer.diskStorage({
     }
 });
 const upload = multer({ storage: storage });
+
+// ✅ Routes Setup
+app.use("/export", stockExportRoutes);
+app.use("/inventory", inventoryRoutes);
+app.use("/support", supportRoutes);
 
 // ✅ Home Page Route
 app.get("/", (req, res) => {
@@ -220,20 +230,7 @@ app.post("/vigilance/report", upload.single("evidence"), async (req, res) => {
         res.status(500).send("❌ Vigilance report submission failed.");
     }
 });
-app.get("/teams", async (req, res) => {
-    try {
-        const teamMembers = await TeamMember.find();
-        const groupedTeam = teamMembers.reduce((acc, member) => {
-            if (!acc[member.category]) acc[member.category] = [];
-            acc[member.category].push(member);
-            return acc;
-        }, {});
-        res.render("team", { team: groupedTeam });
-    } catch (error) {
-        console.error("❌ Error fetching team members:", error);
-        res.status(500).send("❌ Failed to load team members.");
-    }
-});
+
 // ✅ Services Page Route
 app.get("/services", async (req, res) => {
     try {
@@ -255,7 +252,6 @@ app.get("/api/financials", async (req, res) => {
         res.status(500).send("❌ Failed to fetch financial data.");
     }
 });
-
 
 // ✅ Start Server
 const PORT = process.env.PORT || 5000;

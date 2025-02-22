@@ -3,31 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neptune Shipyard</title>
-    <link rel="stylesheet" href="/style.css">
+    <title>Neptune Shipyard | Inventory Management</title>
+    <link rel="stylesheet" href="/styles.css">
     <script defer src="/script.js"></script>
 </head>
 <body>
-
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo-section">
-                <img src="/images/lo.jpg" alt="Neptune Shipyard Logo" class="logo">
-                <h1 class="nav-title">Neptune Shipyard</h1>
-            </div>
-            <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/teams">Teams</a></li>
-                <li><a href="/services">Services</a></li>
-                <li><a href="/tenders">Tender</a></li>
-                <li><a href="/vigilance">Vigilance</a></li>
-                <li><a href="/contact">Contact</a></li>
-                <li><a href="/signin" class="nav-signin">Sign In</a></li> <!-- Sign In now inside Navbar -->
-            </ul>
-        </div>
-    </nav>
+    <% include partials/navbar %>
 
     <!-- Image Scrolling Section -->
     <section class="image-slider">
@@ -41,9 +22,9 @@
     </section>
 
     <!-- Welcome Section -->
-    <section class="welcome-section">
-        <h2>Welcome to Neptune Shipyard</h2>
-    </section>
+    <div class="container">
+        <h1>Welcome to Neptune Shipyard Inventory Management</h1>
+    </div>
 
     <!-- Facilities Section -->
     <section class="facilities-section">
@@ -56,7 +37,6 @@
                     <p>State-of-the-art dry docking facilities for ship repairs.</p>
                 </div>
             </a>
-
             <a href="/facilities/storage" class="facility-card">
                 <img src="/images/storage.jpg" alt="Storage Area">
                 <div class="facility-overlay">
@@ -64,7 +44,6 @@
                     <p>Secure and spacious storage for ship components.</p>
                 </div>
             </a>
-
             <a href="/facilities/workshop" class="facility-card">
                 <img src="/images/workshop.jpg" alt="Workshops">
                 <div class="facility-overlay">
@@ -72,7 +51,6 @@
                     <p>Fully equipped workshops for shipbuilding and repairs.</p>
                 </div>
             </a>
-
             <a href="/facilities/hotels" class="facility-card">
                 <img src="/images/hostel.jpeg" alt="Hotels">
                 <div class="facility-overlay">
@@ -105,10 +83,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Neptune Shipyard. All rights reserved.</p>
-    </footer>
-
+    <% include partials/footer %>
 </body>
 </html>

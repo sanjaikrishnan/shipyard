@@ -1,0 +1,39 @@
+<% include partials/navbar %>
+<div class="container">
+    <h2>Contact Shipyard Support</h2>
+
+    <!-- Support Form -->
+    <form action="/support" method="POST">
+        <label>Name</label>
+        <input type="text" name="name" required>
+
+        <label>Email</label>
+        <input type="email" name="email" required>
+
+        <label>Message</label>
+        <textarea name="message" required></textarea>
+
+        <button type="submit">Submit Request</button>
+    </form>
+
+    <h3>Previous Support Requests</h3>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Message</th>
+            <th>Status</th>
+            <th>Response</th>
+        </tr>
+        <% requests.forEach(request => { %>
+            <tr>
+                <td><%= request.name %></td>
+                <td><%= request.email %></td>
+                <td><%= request.message %></td>
+                <td><%= request.status %></td>
+                <td><%= request.response ? request.response : "Awaiting Response" %></td>
+            </tr>
+        <% }); %>
+    </table>
+</div>
+<% include partials/footer %>
