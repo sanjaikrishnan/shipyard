@@ -19,3 +19,17 @@ document.getElementById("contactForm").addEventListener("submit", function (even
     })
     .catch(error => console.error("❌ Error Sending Data:", error));
 });
+document.addEventListener("DOMContentLoaded", function () {
+    const welcomeText = document.querySelector(".welcome-section h2");
+
+    function getGreeting() {
+        const hour = new Date().getHours();
+        if (hour < 12) return "Good Morning! Welcome to Neptune Shipyard.";
+        if (hour < 18) return "Good Afternoon! Welcome to Neptune Shipyard.";
+        return "Good Evening! Welcome to Neptune Shipyard.";
+    }
+
+    welcomeText.textContent = getGreeting();
+});
+
+

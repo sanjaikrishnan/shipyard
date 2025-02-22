@@ -1,20 +1,27 @@
-<nav>
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/services">Services</a></li>
-        <li><a href="/teams">Teams</a></li>
-        <li><a href="/tenders">Tenders</a></li>
-        <li><a href="/vigilance">Vigilance</a></li>
-        <li><a href="/contact">Contact</a></li>
-
-        <% if (user) { %> 
-            <!-- Show these links only when user is logged in -->
-            <li><a href="/export">Stock Export</a></li>
-            <li><a href="/inventory">Inventory</a></li>
-            <li><a href="/support">Support</a></li>
-            <li><a href="/logout">Logout</a></li>
-        <% } else { %>
-            <li><a href="/signin">Sign In</a></li>
-        <% } %>
-    </ul>
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo-section">
+            <img src="/images/lo.jpg" alt="Neptune Shipyard Logo" class="logo">
+            <h1 class="nav-title">Neptune Shipyard</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/teams">Teams</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/tender">Tender</a></li>
+            <li><a href="/vigilance">Vigilance</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/signin" >Sign In</a></li> 
+            <% if (user) { %> 
+                <!-- Show these links only when user is logged in -->
+                <li><a href="/export">Stock Export</a></li>
+                <li><a href="/inventory">Inventory</a></li>
+                <li><a href="/support">Support</a></li>
+                <li><a href="/logout">Logout</a></li>
+            <% } else { %>
+                <li><a href="/"></a></li>
+            <% } %>
+        </ul>
+    </div>
 </nav>

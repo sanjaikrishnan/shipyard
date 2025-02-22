@@ -12,6 +12,8 @@ const inventoryRoutes = require("./routes/inventory");
 const supportRoutes = require("./routes/support");
 
 const app = express();
+app.use("/inventory", inventoryRoutes);
+
 
 // ✅ Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -71,6 +73,24 @@ const teamSchema = new mongoose.Schema({
     image: String
 });
 const TeamMember = mongoose.model("TeamMember", teamSchema);
+app.get("/teams", async (req, res) => {
+    try {
+        const teamMembers = await TeamMember.find(); // Fetch team members from DB
+
+        // Grouping team members by category (President, Head Officers, Managers, etc.)
+        const groupedTeam = teamMembers.reduce((acc, member) => {
+            if (!acc[member.category]) acc[member.category] = [];
+            acc[member.category].push(member);
+            return acc;
+        }, {});
+
+        res.render("teams", { team: groupedTeam }); // Render teams.ejs
+    } catch (error) {
+        console.error("❌ Error fetching team members:", error);
+        res.status(500).send("❌ Failed to load team members.");
+    }
+});
+
 
 const serviceSchema = new mongoose.Schema({
     title: String,
@@ -168,6 +188,34 @@ app.post("/signin", async (req, res) => {
 });
 
 
+// ✅ Stock Export Schema
+const stockExportSchema = new mongoose.Schema({
+    fullName: String,
+    companyName: String,
+    stockName: String,
+    stockCategory: String,
+    stockImages: [String],
+    createdAt: { type: Date, default: Date.now }
+});
+const StockExport = mongoose.models.StockExport || mongoose.model("StockExport", stockExportSchema);
+
+// Support Request Schema
+const supportSchema = new mongoose.Schema({
+    name: String,
+    email: String,
+    message: String,
+    status: { type: String, default: "Pending" },
+    response: { type: String, default: "" }
+});
+const SupportRequest = mongoose.models.SupportRequest || mongoose.model("SupportRequest", supportSchema);
+
+// Routes
+app.use("/export", stockExportRoutes);
+app.use("/inventory", inventoryRoutes);
+app.use("/support", supportRoutes);
+
+
+
 // ✅ Dashboard Route (Requires Login)
 app.get("/dashboard", (req, res) => {
     if (!req.session.user) return res.redirect("/signin");
@@ -181,16 +229,20 @@ app.get("/logout", (req, res) => {
     });
 });
 
+
+
+
 // ✅ Render Tenders Page
-app.get("/tenders", async (req, res) => {
+app.get("/tender", async (req, res) => {
     try {
         const tenders = await Tender.find();
-        res.render("tender", { tenders });
+        res.render("tenders", { tenders });
     } catch (error) {
         console.error("❌ Error fetching tenders:", error);
         res.status(500).send("❌ Failed to load tenders.");
     }
 });
+
 
 // ✅ Apply for a Tender
 app.post("/tenders/apply", upload.single("document"), async (req, res) => {
@@ -207,7 +259,7 @@ app.post("/tenders/apply", upload.single("document"), async (req, res) => {
         });
 
         await newTender.save();
-        res.redirect("/tenders");
+        res.redirect("/tender");
     } catch (error) {
         console.error("❌ Tender Submission Error:", error);
         res.status(500).send("❌ Tender submission failed.");
@@ -262,6 +314,112 @@ app.get("/api/financials", async (req, res) => {
         res.status(500).send("❌ Failed to fetch financial data.");
     }
 });
+
+// ✅ GET Route - Display Inventory Page
+app.get("/inventory", async (req, res) => {
+    try {
+        const inventoryList = await Inventory.find();
+        res.render("inventory", { inventoryList });
+    } catch (error) {
+        console.error("Error fetching inventory:", error);
+        res.status(500).send("Error loading inventory.");
+    }
+});
+
+// ✅ POST Route - Add Inventory Data to Database
+app.post("/inventory", async (req, res) => {
+    try {
+        const { warehouse, stockType } = req.body;
+        const newInventory = new Inventory({ warehouse, stockType });
+        await newInventory.save();
+        res.redirect("/inventory");
+    } catch (error) {
+        console.error("Error saving inventory:", error);
+        res.status(500).send("Failed to add inventory.");
+    }
+});
+app.get("/admin/support", async (req, res) => {
+    try {
+        const requests = await Support.find();
+        res.render("admin_support", { requests });
+    } catch (error) {
+        console.error("Error fetching support requests:", error);
+        res.status(500).send("Error loading support requests.");
+    }
+});
+
+// Respond to Support Requests
+app.post("/support/respond/:id", async (req, res) => {
+    try {
+        const { response } = req.body;
+        await Support.findByIdAndUpdate(req.params.id, { response, status: "Resolved" });
+        res.redirect("/admin/support");
+    } catch (error) {
+        console.error("Error updating support request:", error);
+        res.status(500).send("Failed to update support request.");
+    }
+});
+// ✅ GET Route - Render Stock Export Form
+app.get("/export", (req, res) => {
+    res.render("export");
+});
+
+// ✅ POST Route - Handle Stock Export Submission
+app.post("/export", upload.array("stockImages"), async (req, res) => {
+    try {
+        const { fullName, companyName, stockName, stockCategory } = req.body;
+        const stockImages = req.files.map(file => "/uploads/" + file.filename);
+
+        const newExportRequest = new StockExport({
+            fullName, companyName, stockName, stockCategory, stockImages
+        });
+        await newExportRequest.save();
+
+        res.send(`<script>alert("✅ Stock export request submitted successfully!"); window.location.href='/export';</script>`);
+    } catch (error) {
+        console.error("❌ Stock Export Submission Error:", error);
+        res.status(500).send("❌ Failed to submit stock export request.");
+    }
+});
+
+// ✅ GET Route - Render Support Page
+app.get("/support", async (req, res) => {
+    try {
+        const requests = await SupportRequest.find();
+        res.render("support", { requests });
+    } catch (error) {
+        console.error("❌ Error fetching support requests:", error);
+        res.status(500).send("❌ Failed to load support requests.");
+    }
+});
+
+// ✅ POST Route - Handle New Support Request
+app.post("/support", async (req, res) => {
+    try {
+        const { name, email, message } = req.body;
+        const newRequest = new SupportRequest({ name, email, message });
+        await newRequest.save();
+        res.redirect("/support");
+    } catch (error) {
+        console.error("❌ Support Request Submission Error:", error);
+        res.status(500).send("❌ Failed to submit support request.");
+    }
+});
+
+// ✅ POST Route - Respond to Support Request
+app.post("/support/respond/:id", async (req, res) => {
+    try {
+        const { response } = req.body;
+        await SupportRequest.findByIdAndUpdate(req.params.id, { response, status: "Resolved" });
+        res.redirect("/support");
+    } catch (error) {
+        console.error("❌ Support Response Error:", error);
+        res.status(500).send("❌ Failed to respond to support request.");
+    }
+});
+// ✅ Start the Server
+// Removed duplicate PORT declaration
+
 
 // ✅ Start Server
 const PORT = process.env.PORT || 5000;

@@ -6,13 +6,63 @@
     <title>Vigilance & Compliance</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    
     <style>
-        .vigilance-section { padding: 50px 0; }
-        .card { transition: transform 0.3s ease-in-out; }
-        .card:hover { transform: translateY(-5px); }
+        /* Vigilance Section Styling */
+        .vigilance-section {
+            padding: 50px 0;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        /* Section Headers */
+        h2, h3 {
+            color: #d9534f;
+        }
+
+        /* Form Styling */
+        .form-control, .form-select {
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        textarea.form-control {
+            height: 120px;
+            resize: none;
+        }
+
+        /* Submit Button */
+        .btn-danger {
+            width: 100%;
+            font-weight: bold;
+            padding: 12px;
+            border-radius: 5px;
+        }
+
+        .btn-danger:hover {
+            background-color: #c9302c;
+        }
+
+        /* FAQ Section */
+        p strong {
+            color: #333;
+        }
+
+        /* Card Effects */
+        .card {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
     </style>
 </head>
 <body>
+
     <div class="container vigilance-section">
         <h2 class="text-center mb-5">Vigilance & Compliance</h2>
         
@@ -56,9 +106,11 @@
         <p><strong>Q: Will my identity remain confidential?</strong></p>
         <p>A: Yes, reports can be submitted anonymously.</p>
     </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
         AOS.init();
     </script>
+
 </body>
 </html>

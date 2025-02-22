@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Shipyard Management</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <h1>About Us</h1>
+    </header>
+    
+    <section class="shipyard-overview">
+        <h2>Shipyard Overview</h2>
+        <p>Welcome to our shipyard, a hub of excellence in shipbuilding and maritime services.</p>
+    </section>
+
+    <section class="history">
+        <h2>Our History</h2>
+        <p>Founded in the early 20th century, our shipyard has a legacy of crafting world-class vessels.</p>
+    </section>
+
+    <section class="leadership">
+        <h2>Leadership Team</h2>
+        <div class="team-container">
+            <% if (leadershipTeam.length > 0) { %>
+                <% leadershipTeam.forEach(member => { %>
+                    <div class="team-member">
+                        <img src="<%= member.image %>" alt="<%= member.name %>">
+                        <h3><%= member.name %></h3>
+                        <p><%= member.role %></p>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p>No leadership team members available.</p>
+            <% } %>
+        </div>
+    </section>
+
+    <section class="facilities">
+        <h2>Our Facilities</h2>
+        <p>We provide top-notch dry docks, storage areas, and maintenance services.</p>
+    </section>
+
+    <a href="/" class="btn">Back to Home</a>
+</body>
+</html>

@@ -1,22 +1,147 @@
-<% include partials/navbar %>
-<div class="container">
-    <h2>Inventory Management</h2>
-    <form>
-        <label>Warehouse Location</label>
-        <select>
-            <option>Chennai</option>
-            <option>Mumbai</option>
-            <option>Delhi</option>
-        </select>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management</title>
+    
+    <style>
+        /* General Container Styling */
+        .container {
+            width: 80%;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
 
-        <label>Stock Type</label>
-        <select>
-            <option>Machinery</option>
-            <option>Spare Parts</option>
-            <option>Raw Materials</option>
-        </select>
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
 
-        <button type="submit">Search</button>
-    </form>
-</div>
-<% include partials/footer %>
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        select, button {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Submit Button */
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Inventory Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* No Records Message */
+        td[colspan="3"] {
+            font-style: italic;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Inventory Management</h2>
+        <form action="/inventory" method="POST">
+            <label>Warehouse Location</label>
+            <select name="warehouse">
+                <option value="Chennai">Chennai</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Delhi">Delhi</option>
+            </select>
+
+            <label>Stock Type</label>
+            <select name="stockType">
+                <option value="Machinery">Machinery</option>
+                <option value="Spare Parts">Spare Parts</option>
+                <option value="Raw Materials">Raw Materials</option>
+            </select>
+
+            <button type="submit">Add to Inventory</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <h2>Inventory List</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Warehouse</th>
+                    <th>Stock Type</th>
+                    <th>Added Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (inventoryList && inventoryList.length > 0) { %>
+                    <% inventoryList.forEach(item => { %>
+                        <tr>
+                            <td><%= item.warehouse %></td>
+                            <td><%= item.stockType %></td>
+                            <td><%= item.createdAt ? item.createdAt.toDateString() : "N/A" %></td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="3">No inventory records found.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+
+    <%- include('partials/footer') %>
+
+</body>
+</html>

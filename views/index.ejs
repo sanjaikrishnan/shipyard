@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neptune Shipyard | Inventory Management</title>
-    <link rel="stylesheet" href="/styles.css">
+    <title>Neptune Shipyard</title>
+    <link rel="stylesheet" href="/style.css">
     <script defer src="/script.js"></script>
 </head>
 <body>
-    <% include partials/navbar %>
+
+  <!-- Navigation Bar -->
+ <%- include('partials/navbar') %>
+
 
     <!-- Image Scrolling Section -->
     <section class="image-slider">
@@ -22,44 +25,55 @@
     </section>
 
     <!-- Welcome Section -->
-    <div class="container">
-        <h1>Welcome to Neptune Shipyard Inventory Management</h1>
-    </div>
-
-    <!-- Facilities Section -->
-    <section class="facilities-section">
-        <h2>Our Facilities</h2>
-        <div class="facilities-grid">
-            <a href="/facilities/drydock" class="facility-card">
-                <img src="/images/drydock.jpg" alt="Dry Dock">
-                <div class="facility-overlay">
-                    <h3>Dry Dock</h3>
-                    <p>State-of-the-art dry docking facilities for ship repairs.</p>
-                </div>
-            </a>
-            <a href="/facilities/storage" class="facility-card">
-                <img src="/images/storage.jpg" alt="Storage Area">
-                <div class="facility-overlay">
-                    <h3>Storage Area</h3>
-                    <p>Secure and spacious storage for ship components.</p>
-                </div>
-            </a>
-            <a href="/facilities/workshop" class="facility-card">
-                <img src="/images/workshop.jpg" alt="Workshops">
-                <div class="facility-overlay">
-                    <h3>Workshops</h3>
-                    <p>Fully equipped workshops for shipbuilding and repairs.</p>
-                </div>
-            </a>
-            <a href="/facilities/hotels" class="facility-card">
-                <img src="/images/hostel.jpeg" alt="Hotels">
-                <div class="facility-overlay">
-                    <h3>Hotels</h3>
-                    <p>Comfortable accommodations for crew and visitors.</p>
-                </div>
-            </a>
+    <section class="welcome-section">
+        <h2>Welcome to Neptune Shipyard</h2>
+        <div class="welcome-buttons">
+            <a href="/services" class="btn">Explore Services</a>
+            <a href="#location" class="btn">Our Location</a>
+            <a href="/about" class="btn">About Us</a>
         </div>
     </section>
+    <!-- Facilities Section -->
+<section class="facilities-section">
+    <h2>Our Facilities</h2>
+    <div class="facilities-grid">
+        <!-- Dry Dock Card -->
+        <a href="/facilities/drydock" class="facility-card">
+            <img src="/images/drydock.jpg" alt="Dry Dock">
+            <div class="facility-overlay">
+                <h3>Dry Dock</h3>
+                <p>State-of-the-art dry docking facilities for ship repairs.</p>
+            </div>
+        </a>
+
+        <!-- Storage Area Card -->
+        <a href="/facilities/storage" class="facility-card">
+            <img src="/images/storage.jpg" alt="Storage Area">
+            <div class="facility-overlay">
+                <h3>Storage Area</h3>
+                <p>Secure and spacious storage for ship components.</p>
+            </div>
+        </a>
+
+        <!-- Workshops Card -->
+        <a href="/facilities/workshop" class="facility-card">
+            <img src="/images/workshop.jpg" alt="Workshops">
+            <div class="facility-overlay">
+                <h3>Workshops</h3>
+                <p>Fully equipped workshops for shipbuilding and repairs.</p>
+            </div>
+        </a>
+
+        <!-- Hotels Card -->
+        <a href="/facilities/hotels" class="facility-card">
+            <img src="/images/hostel.jpeg" alt="Hotels">
+            <div class="facility-overlay">
+                <h3>Hotels</h3>
+                <p>Comfortable accommodations for crew and visitors.</p>
+            </div>
+        </a>
+    </div>
+</section>
 
     <!-- Location Section -->
     <section class="map" id="location">
@@ -68,21 +82,11 @@
     </section>
 
     <!-- Contact Us Section -->
-    <section class="contact">
-        <div class="contact-container">
-            <h2>Contact Us</h2>
-            <form id="contactForm">
-                <label for="name">Name:</label>
-                <input type="text" id="name" required>
-                <label for="email">Email:</label>
-                <input type="email" id="email" required>
-                <label for="message">Message:</label>
-                <textarea id="message" required></textarea>
-                <button type="submit" class="btn">Submit</button>
-            </form>
-        </div>
-    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Neptune Shipyard. All rights reserved.</p>
+    </footer>
 
-    <% include partials/footer %>
 </body>
 </html>
