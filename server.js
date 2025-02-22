@@ -110,17 +110,17 @@ app.post("/register", async (req, res) => {
         const existingUser = await User.findOne({ email });
 
         if (existingUser) {
-            return res.send("❌ Email already registered. Please use a different email.");
+            return res.send(`<script>alert("❌ Email already registered! Please Sign In."); window.location.href='/signin';</script>`);
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new User({ username, email, password: hashedPassword });
         await newUser.save();
 
-        res.redirect("/signin");
+        return res.send(`<script>alert("✅ Registration successful! Please Sign In."); window.location.href='/signin';</script>`);
     } catch (error) {
         console.error("❌ Registration Error:", error);
-        res.status(500).send("❌ Registration failed.");
+        res.status(500).send(`<script>alert("❌ Registration failed. Please try again."); window.location.href='/register';</script>`);
     }
 });
 
@@ -135,18 +135,28 @@ app.post("/signin", async (req, res) => {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
 
-        if (!user) return res.send("❌ Invalid email or password.");
+        if (!user) {
+            // If user does not exist, create a new one
+            const hashedPassword = await bcrypt.hash(password, 10);
+            const newUser = new User({ email, password: hashedPassword });
+            await newUser.save();
+            req.session.user = newUser;
+            return res.send(`<script>alert("New account created successfully!"); window.location.href='/';</script>`);
+        }
 
         const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) return res.send("❌ Invalid email or password.");
+        if (!isMatch) {
+            return res.send(`<script>alert("Invalid email or password. Please try again."); window.location.href='/signin';</script>`);
+        }
 
         req.session.user = user;
-        res.redirect("/dashboard");
+        return res.send(`<script>alert("Login successful! Redirecting to home page."); window.location.href='/';</script>`);
     } catch (error) {
         console.error("❌ Login Error:", error);
-        res.status(500).send("❌ Login failed.");
+        res.status(500).send(`<script>alert("❌ Login failed. Please try again later."); window.location.href='/signin';</script>`);
     }
 });
+
 
 // ✅ Dashboard Route (Requires Login)
 app.get("/dashboard", (req, res) => {
